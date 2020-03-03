@@ -10,7 +10,13 @@ class ApiController {
       const { since } = req.query
 
       const fetch = await axios.default.get(`${url}users?since=${since}`);
-      return res.json({ status: true, message: "Ok", result: fetch.data }).status(200)
+
+      return res.json({
+        status: true, message: "Ok",
+        last: '/api/users?' + 'since',
+        next: '/api/users?' + fetch.headers.link.split(',')[0].split(';')[0].split('<')[1].split('>')[0].split('?')[1],
+        result: fetch.data,
+      }).status(200)
     }
     catch (err) {
       return res.json({
