@@ -29,7 +29,7 @@ describe('', () => {
   })
   it('should return that the user does not have a repository ', async () => {
     const response = await request(app).get('/api/users/danilomartinssilvadsfdsfdsa/repos');
-    console.log(response.body)
+
 
     expect(response.body.status).toBe(false)
   })
